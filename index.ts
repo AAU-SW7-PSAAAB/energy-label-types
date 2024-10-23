@@ -1,3 +1,2 @@
-import index from "./lib/index"
+import index from './lib/index'
 export default index
-
