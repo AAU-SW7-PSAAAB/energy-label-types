@@ -1,7 +1,7 @@
 import z from 'zod'
 
 /**
- * Statuscode for a run of a plugin
+ * Statuscodes for a run of a plugin
  * */
 export enum StatusCode {
     Success = 0,
@@ -44,12 +44,16 @@ export type Version = z.infer<typeof version>
  * Used when calling an endpoint that requires nothing in the body
  * */
 export const nodata = undefined
+
+/**
+ * Type of nodata
+ */
 export type NoData = undefined
 
 const callConsts = {
     '/log': {
         method: 'POST',
-        parse: (_: Response) => undefined,
+        parse: () => undefined,
     },
     '/version': {
         method: 'GET',
