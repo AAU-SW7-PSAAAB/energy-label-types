@@ -50,6 +50,11 @@ export const nodata = undefined
  */
 export type NoData = undefined
 
+/**
+ * Paths exported by the server
+ */
+export type Paths = keyof typeof callConsts;
+
 const callConsts = {
     '/log': {
         method: 'POST',
