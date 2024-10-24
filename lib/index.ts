@@ -53,9 +53,9 @@ export type NoData = undefined
 /**
  * Paths exported by the server
  */
-export type Paths = keyof typeof callConsts;
+export type Paths = keyof typeof callConsts
 
-const callConsts = {
+export const callConsts = {
     '/log': {
         method: 'POST',
         parse: () => undefined,
