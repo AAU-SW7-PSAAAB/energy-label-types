@@ -1,2 +1,2 @@
-import index from './lib/index'
-export default index
+export { Server, version, run } from './lib/index.js'
+export type { Paths, Version, Run } from './lib/index.js'
