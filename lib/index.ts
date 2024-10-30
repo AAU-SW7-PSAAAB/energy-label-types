@@ -60,10 +60,14 @@ export type Paths = keyof typeof callConsts;
 export const callConsts = {
 	"/log": {
 		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
 		parse: () => undefined,
 	},
 	"/version": {
 		method: "GET",
+		headers: {},
 		parse: (r: Response) => r.json().then(version.parse),
 	},
 };
@@ -99,9 +103,16 @@ export class Server {
 		path: P,
 		data: CallTypes[P]["data"],
 	): Promise<CallTypes[P]["return"]> {
-		return await fetch(`http://${this.domain}${path}`, {
+		const response = await fetch(`http://${this.domain}${path}`, {
 			method: callConsts[path].method,
+			headers: callConsts[path].headers,
 			body: JSON.stringify(data),
-		}).then(callConsts[path].parse);
+		})
+
+		if (!response.ok) {
+			throw new Error('An error has occurred: ' + response.statusText);
+		}
+
+		return callConsts[path].parse(response)
 	}
 }
