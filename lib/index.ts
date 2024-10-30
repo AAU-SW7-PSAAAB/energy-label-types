@@ -61,7 +61,7 @@ export const callConsts = {
 	"/log": {
 		method: "POST",
 		headers: {
-			'Content-Type': 'application/json'
+			"Content-Type": "application/json",
 		},
 		parse: () => undefined,
 	},
@@ -107,12 +107,12 @@ export class Server {
 			method: callConsts[path].method,
 			headers: callConsts[path].headers,
 			body: JSON.stringify(data),
-		})
+		});
 
 		if (!response.ok) {
-			throw new Error('An error has occurred: ' + response.statusText);
+			throw new Error("An error has occurred: " + response.statusText);
 		}
 
-		return callConsts[path].parse(response)
+		return callConsts[path].parse(response);
 	}
 }
