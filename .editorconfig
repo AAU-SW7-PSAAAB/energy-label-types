@@ -7,4 +7,5 @@ insert_final_newline = true
 
 [*.{html,css,js,ts,json}]
 indent_style = tab
+indent_size = 4
 tab_width = 4
