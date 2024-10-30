@@ -8,7 +8,7 @@ export enum StatusCodes {
 	FailureNotSpecified = 999,
 }
 
-export const statusCodeEnum = z.nativeEnum(StatusCodes)
+export const statusCodeEnum = z.nativeEnum(StatusCodes);
 
 /**
  * Zod object for validating a run object
@@ -23,7 +23,7 @@ export const run = z.object({
 	extensionVersion: z.string(),
 	url: z.string(),
 	path: z.string(),
-})
+});
 
 /**
  * Zod object for validating a version object
@@ -69,10 +69,10 @@ export const callConsts = {
 };
 
 export interface CallTypes {
-	'/log': {
-		data: Run | Array<Run>
-		return: void
-	}
+	"/log": {
+		data: Run | Array<Run>;
+		return: void;
+	};
 
 	"/version": {
 		data: NoData;
@@ -97,11 +97,11 @@ export class Server {
 	 * */
 	async call<P extends keyof CallTypes>(
 		path: P,
-		data: CallTypes[P]['data']
-	): Promise<CallTypes[P]['return']> {
+		data: CallTypes[P]["data"],
+	): Promise<CallTypes[P]["return"]> {
 		return await fetch(`http://${this.domain}${path}`, {
 			method: callConsts[path].method,
 			body: JSON.stringify(data),
-		}).then(callConsts[path].parse)
+		}).then(callConsts[path].parse);
 	}
 }

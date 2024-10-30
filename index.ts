@@ -4,5 +4,5 @@ export {
 	Server,
 	version,
 	run,
-} from './lib/index.js'
-export type { Paths, Version, Run } from './lib/index.js'
+} from "./lib/index.js";
+export type { Paths, Version, Run } from "./lib/index.js";
