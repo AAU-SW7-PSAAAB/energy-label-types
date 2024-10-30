@@ -3,22 +3,24 @@ import z from "zod";
 /**
  * Statuscodes for a run of a plugin
  * */
-export enum StatusCode {
+export enum StatusCodes {
 	Success = 0,
 	FailureNotSpecified = 999,
 }
+
+export const statusCodeEnum = z.nativeEnum(StatusCodes);
 
 /**
  * Zod object for validating a run object
  * */
 export const run = z.object({
 	score: z.number(),
-	statusCode: z.number().refine(Object.values(StatusCode).includes),
+	statusCode: statusCodeEnum,
 	browserName: z.string(),
 	browserVersion: z.string(),
-	plutingName: z.string(),
+	pluginName: z.string(),
 	pluginVersion: z.string(),
-	extentionVersion: z.string(),
+	extensionVersion: z.string(),
 	url: z.string(),
 	path: z.string(),
 });
@@ -66,7 +68,7 @@ export const callConsts = {
 	},
 };
 
-interface CallTypes {
+export interface CallTypes {
 	"/log": {
 		data: Run | Array<Run>;
 		return: void;
@@ -93,10 +95,10 @@ export class Server {
 	 *     /log (data Run) :: for logging a run
 	 *     /version nodata :: for getting the version of the server
 	 * */
-	async call<P extends keyof CallTypes, K extends CallTypes[P]>(
+	async call<P extends keyof CallTypes>(
 		path: P,
-		data: K["data"],
-	): Promise<K["return"]> {
+		data: CallTypes[P]["data"],
+	): Promise<CallTypes[P]["return"]> {
 		return await fetch(`http://${this.domain}${path}`, {
 			method: callConsts[path].method,
 			body: JSON.stringify(data),
