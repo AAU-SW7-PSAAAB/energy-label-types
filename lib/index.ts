@@ -5,7 +5,12 @@ import z from "zod";
  * */
 export enum StatusCodes {
 	Success = 0,
-	FailureNotSpecified = 999,
+	NoDocument = 1100,
+	NoDom = 1101,
+	NoCss = 1102,
+	NoNetwork = 1200,
+	FailureNotSpecified = 9999,
+	TestRun = 10000,
 }
 
 export const statusCodeEnum = z.nativeEnum(StatusCodes);
