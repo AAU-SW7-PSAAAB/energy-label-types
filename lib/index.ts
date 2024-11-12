@@ -21,6 +21,7 @@ export const statusCodeEnum = z.nativeEnum(StatusCodes);
 export const run = z.object({
 	score: z.number(),
 	statusCode: statusCodeEnum,
+	errorMessage: z.string().optional(),
 	browserName: z.string(),
 	browserVersion: z.string(),
 	pluginName: z.string(),
