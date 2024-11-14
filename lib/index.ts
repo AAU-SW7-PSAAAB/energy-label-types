@@ -9,6 +9,7 @@ export enum StatusCodes {
 	NoDom = 1101,
 	NoCss = 1102,
 	NoNetwork = 1200,
+	InvalidScore = 2000,
 	FailureNotSpecified = 9999,
 	TestRun = 10000,
 }
